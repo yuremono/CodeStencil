@@ -3,8 +3,9 @@
 import type { LLMProvider } from './types'
 import { OpenAIProvider } from './openai'
 import { OllamaProvider } from './ollama'
+import { ZAIProvider } from './zai'
 
-export type ProviderType = 'openai' | 'ollama'
+export type ProviderType = 'openai' | 'ollama' | 'zai'
 
 export interface LLMConfig {
   type: ProviderType
@@ -26,6 +27,12 @@ export class LLMFactory {
 
       case 'ollama':
         return new OllamaProvider(config.baseUrl, config.model)
+
+      case 'zai':
+        if (!config.apiKey) {
+          throw new Error('ZAI API key is required')
+        }
+        return new ZAIProvider(config.apiKey, config.baseUrl)
 
       default:
         throw new Error(`Unknown provider type: ${config.type}`)
@@ -57,6 +64,14 @@ export class LLMFactory {
       available.push('ollama')
     }
 
+    // Check ZAI
+    if (process.env.ZAI_API_KEY) {
+      const zai = new ZAIProvider(process.env.ZAI_API_KEY)
+      if (await zai.isAvailable()) {
+        available.push('zai')
+      }
+    }
+
     return available
   }
 }
@@ -65,3 +80,4 @@ export class LLMFactory {
 export * from './types'
 export { OpenAIProvider, OpenAIChatProvider } from './openai'
 export { OllamaProvider } from './ollama'
+export { ZAIProvider } from './zai'

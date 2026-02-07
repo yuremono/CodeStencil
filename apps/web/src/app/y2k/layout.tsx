@@ -1,5 +1,7 @@
 import { Y2KCartProvider } from "@/context/y2k-cart-context";
-import "./y2k/globals.css";
+import { Y2KWishlistProvider } from "@/context/y2k-wishlist-context";
+import "./globals.css";
+import { Y2KFonts } from "./y2k-fonts";
 
 export default function Y2KLayout({
   children,
@@ -8,7 +10,10 @@ export default function Y2KLayout({
 }) {
   return (
     <Y2KCartProvider>
-      {children}
+      <Y2KWishlistProvider>
+        <Y2KFonts />
+        {children}
+      </Y2KWishlistProvider>
     </Y2KCartProvider>
   );
 }

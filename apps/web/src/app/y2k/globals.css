@@ -1,0 +1,211 @@
+/**
+ * Y2K Retro Design System - Globals
+ * Dribbble inspired vibrant pink/purple gradient theme
+ */
+
+/* Y2K Theme Background */
+@layer base {
+  .y2k-theme {
+    /* Vibrant pink/purple gradient background */
+    background: linear-gradient(135deg, #ff6ec7 0%, #7873f5 50%, #a855f7 100%);
+    min-height: 100vh;
+  }
+
+  /* Darker variant for content areas */
+  .y2k-theme-dark {
+    background: linear-gradient(135deg, #2b1d38 0%, #1a0a2e 100%);
+  }
+}
+
+/* Y2K Typography */
+@layer components {
+  /* Pixel Font - Press Start 2P */
+  .font-y2k-pixel {
+    font-family: 'Press Start 2P', 'VT323', 'Courier New', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  /* VT323 - Retro terminal font */
+  .font-y2k-terminal {
+    font-family: 'VT323', 'Courier New', monospace;
+    letter-spacing: 0.1em;
+  }
+
+  /* Y2K Headings */
+  .y2k-title {
+    @apply font-y2k-pixel;
+    background: linear-gradient(90deg, #ff6ec7, #7873f5, #00e5ff, #ffeb3b);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: y2k-gradient-shift 5s ease infinite;
+  }
+
+  @keyframes y2k-gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+}
+
+/* Y2K Color Palette */
+@layer utilities {
+  /* Vibrant Pink */
+  .y2k-pink {
+    color: #ff6ec7;
+  }
+  .bg-y2k-pink {
+    background-color: #ff6ec7;
+  }
+
+  /* Vibrant Purple */
+  .y2k-purple {
+    color: #7873f5;
+  }
+  .bg-y2k-purple {
+    background-color: #7873f5;
+  }
+
+  /* Bright Cyan */
+  .y2k-cyan {
+    color: #00e5ff;
+  }
+  .bg-y2k-cyan {
+    background-color: #00e5ff;
+  }
+
+  /* Bright Yellow */
+  .y2k-yellow {
+    color: #ffeb3b;
+  }
+  .bg-y2k-yellow {
+    background-color: #ffeb3b;
+  }
+}
+
+/* Y2K Effects - Metallic & Psychedelic */
+@layer components {
+  /* Metallic Gradient Text */
+  .y2k-metallic-text {
+    background: linear-gradient(
+      135deg,
+      #c0c0c0 0%,
+      #ffffff 25%,
+      #a0a0a0 50%,
+      #ffffff 75%,
+      #c0c0c0 100%
+    );
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: metallic-shimmer 3s ease infinite;
+  }
+
+  @keyframes metallic-shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Psychedelic Glow */
+  .y2k-psychedelic-glow {
+    text-shadow:
+      0 0 5px #ff6ec7,
+      0 0 10px #7873f5,
+      0 0 20px #00e5ff,
+      0 0 40px #ffeb3b;
+    animation: psychedelic-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes psychedelic-pulse {
+    0%, 100% {
+      text-shadow:
+        0 0 5px #ff6ec7,
+        0 0 10px #7873f5,
+        0 0 20px #00e5ff;
+    }
+    50% {
+      text-shadow:
+        0 0 10px #7873f5,
+        0 0 20px #00e5ff,
+        0 0 40px #ffeb3b,
+        0 0 60px #ff6ec7;
+    }
+  }
+
+  /* Hover Glow Effect */
+  .y2k-hover-glow {
+    transition: all 0.3s ease;
+  }
+
+  .y2k-hover-glow:hover {
+    box-shadow:
+      0 0 10px #ff6ec7,
+      0 0 20px #7873f5,
+      0 0 30px #00e5ff;
+    transform: translateY(-2px);
+  }
+}
+
+/* Y2K Border Effects */
+@layer utilities {
+  /* Pixel Border */
+  .y2k-pixel-border {
+    border: 4px solid;
+    border-image: repeating-linear-gradient(
+      90deg,
+      #ff6ec7 0px,
+      #ff6ec7 4px,
+      #7873f5 4px,
+      #7873f5 8px,
+      #00e5ff 8px,
+      #00e5ff 12px
+    ) 4;
+  }
+
+  /* Rainbow Border */
+  .y2k-rainbow-border {
+    border: 3px solid transparent;
+    background: linear-gradient(#2b1d38, #2b1d38) padding-box,
+                linear-gradient(135deg, #ff6ec7, #7873f5, #00e5ff, #ffeb3b) border-box;
+  }
+}
+
+/* Y2K Button Styles */
+@layer components {
+  .y2k-button {
+    @apply font-y2k-pixel;
+    background: linear-gradient(135deg, #ff6ec7, #7873f5);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+  }
+
+  .y2k-button:hover {
+    background: linear-gradient(135deg, #7873f5, #00e5ff);
+    box-shadow:
+      0 0 15px #ff6ec7,
+      0 0 30px #7873f5;
+    transform: scale(1.05);
+  }
+
+  .y2k-button-outline {
+    @apply font-y2k-pixel;
+    background: transparent;
+    color: #ff6ec7;
+    padding: 12px 24px;
+    border: 3px solid #ff6ec7;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+  }
+
+  .y2k-button-outline:hover {
+    background: #ff6ec7;
+    color: white;
+    box-shadow: 0 0 20px #ff6ec7;
+  }
+}

@@ -20,6 +20,8 @@ CodeStencilは、プロジェクトのコンテキストを理解し、動的に
 | ベクトル検索 | RAG (Retrieval-Augmented Generation) | 類似パターンの検索 |
 | 実行環境 | WebContainer | ブラウザ内でのコード実行 |
 | API通信 | tRPC | 型安全なクライアント-サーバー通信 |
+| ビルドシステム | Turborepo | 高速なMonorepoビルド |
+| パッケージマネージャー | pnpm | 効率的な依存関係管理 |
 
 ## アーキテクチャ
 
@@ -42,20 +44,24 @@ CodeStencilは、プロジェクトのコンテキストを理解し、動的に
 | **Generator Agent** | LLMを用いてテンプレートを動的に生成 |
 | **Validator Agent** | 生成コードの静的解析と品質検証 |
 
-## プロジェクト構造
+## Monorepo構造
 
 ```
 CodeStencil/
-├── src/
+├── apps/
+│   ├── web/          # Next.js Webアプリケーション
+│   └── cli/          # CLIツール
+├── packages/
 │   ├── parser/       # Parser Agent (AST解析)
 │   ├── style/        # Style Agent (コーディングスタイル学習)
 │   ├── generator/    # Generator Agent (テンプレート生成)
 │   ├── validator/    # Validator Agent (静的解析)
-│   └── shared/       # 共通ユーティリティ・型定義
+│   ├── shared/       # 共通ユーティリティ・型定義
+│   └── config/       # 共通設定 (ESLint, TypeScript)
 ├── docs/             # ドキュメント
-├── tests/            # テストコード
-├── scripts/          # ビルド・開発スクリプト
-└── README.md         # このファイル
+├── turbo.json        # Turborepo設定
+├── pnpm-workspace.yaml  # pnpm workspace設定
+└── package.json      # ルートpackage.json
 ```
 
 ## 開発手順
@@ -64,47 +70,68 @@ CodeStencil/
 
 ```bash
 # リポジトリのクローン
-git clone <repository-url>
+git clone https://github.com/yuremono/CodeStencil.git
 cd CodeStencil
 
-# 依存関係のインストール（未実装）
-# npm install または 任意のパッケージマネージャー
+# pnpmのインストール（未インストールの場合）
+npm install -g pnpm
+
+# 依存関係のインストール
+pnpm install
 ```
 
 ### 開発
 
 ```bash
-# 開発サーバーの起動（未実装）
-# npm run dev
+# 開発サーバーの起動
+pnpm dev
 
-# テストの実行（未実装）
-# npm test
+# テストの実行
+pnpm test
 
-# ビルド（未実装）
-# npm run build
+# ビルド
+pnpm build
+
+# リント
+pnpm lint
+```
+
+### パッケージ個別の実行
+
+```bash
+# Webアプリの開発
+pnpm --filter @codestencil/web dev
+
+# CLIのビルド
+pnpm --filter @codestencil/cli build
+
+# Parserのテスト
+pnpm --filter @codestencil/parser test
 ```
 
 ## ロードマップ
 
-- [ ] **Phase 1**: 基本架构の実装
-  - [ ] Parser Agent の実装
-  - [ ] Style Agent の実装
-  - [ ] Generator Agent の実装
-  - [ ] Validator Agent の実装
+### Phase 1: 基盤整備 ✅
+- [x] Turborepo + pnpm workspaceの設定
+- [x] パッケージ構造の実装
+- [x] TypeScript/ESLint共有設定
+- [x] Parser Agentの基本実装
 
-- [ ] **Phase 2**: コア機能の実装
-  - [ ] AST解析モジュール
-  - [ ] ベクトル検索システム
-  - [ ] テンプレート生成エンジン
+### Phase 2: コア機能実装
+- [ ] Style Agentの実装
+- [ ] Generator Agentの実装
+- [ ] Validator Agentの実装
+- [ ] データベース設定 (PostgreSQL + pgvector)
 
-- [ ] **Phase 3**: UI/UXの実装
-  - [ ] Webベースのエディタ連携
-  - [ ] Language Server プロトコル対応
+### Phase 3: UI/UX実装
+- [ ] Next.js Webアプリケーション
+- [ ] CLIツール
+- [ ] Language Server プロトコル対応
 
-- [ ] **Phase 4**: 本番対応
-  - [ ] パフォーマンス最適化
-  - [ ] セキュリティ対策
-  - [ ] デプロイメント
+### Phase 4: 本番対応
+- [ ] パフォーマンス最適化
+- [ ] セキュリティ対策
+- [ ] デプロイメント
 
 ## ライセンス
 
@@ -114,3 +141,4 @@ MIT License
 
 **作成日**: 2026-02-07
 **ステータス**: 開発中
+**リポジトリ**: https://github.com/yuremono/CodeStencil

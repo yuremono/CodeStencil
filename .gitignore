@@ -2,6 +2,16 @@
 node_modules/
 .pnp
 .pnp.js
+.pnpm-store/
+
+# Turbo
+.turbo/
+
+# Monorepo
+**/node_modules/
+**/dist/
+**/.next/
+**/out/
 
 # Testing
 coverage/

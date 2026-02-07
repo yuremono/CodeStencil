@@ -1,0 +1,29 @@
+{
+  "name": "@codestencil/parser",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tree-sitter": "./src/tree-sitter.ts"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@codestencil/shared": "workspace:*",
+    "tree-sitter": "^0.22.0",
+    "tree-sitter-typescript": "^0.21.2",
+    "tree-sitter-javascript": "^0.23.1",
+    "tree-sitter-python": "^0.23.4",
+    "tree-sitter-go": "^0.23.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/tree-sitter": "^0.20.7",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

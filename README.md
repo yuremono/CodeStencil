@@ -78,6 +78,34 @@ npm install -g pnpm
 
 # 依存関係のインストール
 pnpm install
+
+# Dockerでデータベースを起動
+pnpm docker:up
+
+# データベースのマイグレーション
+pnpm db:push
+
+# Prisma Clientの生成
+pnpm db:generate
+
+# シードデータの挿入（オプション）
+pnpm db:seed
+```
+
+### 環境変数の設定
+
+`.env` ファイルを作成し、以下の環境変数を設定してください：
+
+```bash
+# データベース
+DATABASE_URL="postgresql://codestencil:codestencil_dev_password@localhost:5432/codestencil?schema=public"
+
+# OpenAI API（LLMとエンベディング用）
+OPENAI_API_KEY="sk-..."
+
+# Ollama（ローカルLLM、オプション）
+OLLAMA_BASE_URL="http://localhost:11434"
+OLLAMA_MODEL="llama3.1"
 ```
 
 ### 開発
@@ -125,7 +153,9 @@ pnpm --filter @codestencil/parser test
 - [ ] Style Agentの実装
 - [ ] Generator Agentの実装
 - [ ] Validator Agentの実装
-- [ ] データベース設定 (PostgreSQL + pgvector)
+- [x] データベース設定 (PostgreSQL + pgvector)
+- [x] LLM連携 (OpenAI/Ollama)
+- [x] ベクトル検索 (RAG)
 
 ### Phase 3: UI/UX実装
 - [ ] Next.js Webアプリケーション

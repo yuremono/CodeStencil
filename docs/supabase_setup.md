@@ -19,8 +19,15 @@ CodeStencilで使用するSupabase（PostgreSQL + pgvector）環境の構築手�
 2. 「Start your project」をクリック
 3. GitHubアカウントでログイン（またはメールアドレスで登録）
 
-### 1.2 新規プロジェクトの作成
+### 1.2 匿名プロジェクト（Anonymous Project）の作成
 
+**匿名プロジェクトの特徴**:
+- 無料で使用可能
+- APIキーなしで接続できる
+- `.env.local` で匿名キーを設定するだけ
+- SQL Editorで拡張を有効化するだけですぐに使える
+
+**手順**:
 1. ダッシュボードで「New Project」をクリック
 2. 以下の情報を入力：
 
@@ -35,16 +42,21 @@ CodeStencilで使用するSupabase（PostgreSQL + pgvector）環境の構築手�
 3. 「Create new project」をクリック
 4. プロジェクトの作成完了まで待機（約2分）
 
+**重要**: 匿名プロジェクトでも、データベースパスワードは安全な場所に保存してください。接続には必要です。
+
 ---
 
 ## 2. pgvector拡張の有効化
 
 ### 2.1 SQL Editorで拡張を有効化
 
+**SQL Editorの場所**:
 1. Supabaseダッシュボードでプロジェクトを選択
 2. 左サイドバーから「SQL Editor」をクリック
 3. 「New Query」をクリック
-4. 以下のSQLを実行：
+
+**pgvector拡張の有効化**:
+SQL Editorに以下のSQLを入力して実行：
 
 ```sql
 -- pgvector拡張の有効化
@@ -54,7 +66,15 @@ CREATE EXTENSION IF NOT EXISTS vector;
 SELECT * FROM pg_extension WHERE extname = 'vector';
 ```
 
-5. 実行結果に `vector` が表示されれば成功です。
+**実行方法**:
+- SQL入力欄の右下にある「Run」ボタンをクリック
+- または `Ctrl/Cmd + Enter` で実行
+
+**成功の確認**:
+- 実行結果に `vector` が表示されれば成功です
+- 「Success」メッセージが表示されます
+
+**注意**: これは一度だけ実行すればOKです。拡張はプロジェクトで有効になり、再読み込み不要です。
 
 ---
 
@@ -124,25 +144,16 @@ SELECT 1 - (embedding <=> query_vector) AS similarity
 | **anon public** | パブリック匿名キー |
 | **service_role** | サービスロールキー（サーバーサイドでのみ使用） |
 
-### 4.2 .envファイルの設定
+### 4.2 .envファイルの設定（DATABASE_URLのみで接続）
 
-`.env` ファイルに以下の形式で設定します：
+**重要**: 匿名プロジェクトでは、`DATABASE_URL` だけで接続できます。追加のAPIキーは不要です。
+
+`.env` または `.env.local` ファイルに以下の形式で設定します：
 
 ```bash
 # Supabase Database (PostgreSQL + pgvector)
+# これだけで接続できます
 DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres"
-
-# Supabase API (optional)
-NEXT_PUBLIC_SUPABASE_URL="https://[PROJECT-REF].supabase.co"
-NEXT_PUBLIC_SUPABASE_ANON_KEY="[YOUR-ANON-KEY]"
-SUPABASE_SERVICE_ROLE_KEY="[YOUR-SERVICE-ROLE-KEY]"
-
-# OpenAI API (optional - for LLM features)
-OPENAI_API_KEY="sk-..."
-
-# Ollama (optional - for local LLM)
-OLLAMA_BASE_URL="http://localhost:11434"
-OLLAMA_MODEL="llama3.1"
 ```
 
 **DATABASE_URLの形式**:
@@ -152,6 +163,26 @@ postgresql://postgres:[PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres
 
 - `[PASSWORD]`: プロジェクト作成時に設定したパスワード
 - `[PROJECT-REF]`: Supabaseプロジェクトの参照ID（URLから確認可能）
+
+**補足**: NextAuth等を使用する場合のみ、以下の追加設定が必要です：
+
+```bash
+# Supabase API (NextAuth等を使用する場合のみ)
+NEXT_PUBLIC_SUPABASE_URL="https://[PROJECT-REF].supabase.co"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="[YOUR-ANON-KEY]"
+SUPABASE_SERVICE_ROLE_KEY="[YOUR-SERVICE-ROLE-KEY]"
+```
+
+**OpenAI API（LLM機能を使用する場合）**:
+```bash
+OPENAI_API_KEY="sk-..."
+```
+
+**Ollama（ローカルLLM、オプション）**:
+```bash
+OLLAMA_BASE_URL="http://localhost:11434"
+OLLAMA_MODEL="llama3.1"
+```
 
 ---
 

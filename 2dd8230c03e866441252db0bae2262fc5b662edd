@@ -1,0 +1,25 @@
+.gitignore
+  31b2c1cc5b8cd3f4 67-71
+.claude/settings.json
+  31b2c1cc5b8cd3f4 1-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.0.42",
+  "base_commit_sha": "2dd8230c03e866441252db0bae2262fc5b662edd",
+  "prompts": {
+    "31b2c1cc5b8cd3f4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "dc5e20b5-ffa6-4a71-ae09-9f573323b9bf",
+        "model": "glm-4.7"
+      },
+      "human_author": "yuremono <5alviaofficinali50@gmail.com>",
+      "messages": [],
+      "total_additions": 22,
+      "total_deletions": 0,
+      "accepted_lines": 22,
+      "overriden_lines": 0
+    }
+  }
+}

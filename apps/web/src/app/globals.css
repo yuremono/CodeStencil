@@ -57,3 +57,111 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Y2K Retro Design Utilities */
+@layer utilities {
+  /* Windows 95 3D Border Effect */
+  .win95-border {
+    border-top: 2px solid #dfdfdf;
+    border-left: 2px solid #dfdfdf;
+    border-right: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+  }
+
+  .win95-border-inset {
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #dfdfdf;
+    border-bottom: 2px solid #dfdfdf;
+  }
+
+  /* Scanline Effect */
+  .scanlines {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.1) 2px,
+      rgba(0, 0, 0, 0.1) 4px
+    );
+  }
+
+  /* CRT Screen Effect */
+  .crt-screen {
+    animation: flicker 0.15s infinite;
+  }
+
+  @keyframes flicker {
+    0% { opacity: 0.97; }
+    50% { opacity: 1; }
+    100% { opacity: 0.98; }
+  }
+
+  /* Neon Glow Effect */
+  .neon-glow {
+    text-shadow:
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 40px currentColor;
+  }
+
+  .neon-box-glow {
+    box-shadow:
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 20px currentColor;
+  }
+
+  /* Matrix Rain Effect (simplified) */
+  .matrix-text {
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 5px #00ff00;
+  }
+
+  /* Pixel Art Font */
+  .font-pixel {
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    image-rendering: pixelated;
+  }
+
+  /* Retro Gradient */
+  .retro-gradient {
+    background: linear-gradient(180deg, #ff6ec7 0%, #7873f5 50%, #00ffff 100%);
+  }
+
+  /* Starfield Background */
+  .starfield {
+    background-color: #000000;
+    background-image:
+      radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 50px 160px, #ffffff, rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0,0,0,0));
+    background-size: 200px 200px;
+    animation: starfield-move 20s linear infinite;
+  }
+
+  @keyframes starfield-move {
+    from { background-position: 0 0; }
+    to { background-position: 0 200px; }
+  }
+
+  /* Y2K Metallic Effect */
+  .y2k-metallic {
+    background: linear-gradient(135deg, #c0c0c0 0%, #e0e0e0 50%, #a0a0a0 100%);
+  }
+
+  /* Bevel Effect */
+  .bevel-out {
+    box-shadow:
+      inset 1px 1px 0px #ffffff,
+      inset -1px -1px 0px #808080;
+  }
+
+  .bevel-in {
+    box-shadow:
+      inset -1px -1px 0px #ffffff,
+      inset 1px 1px 0px #808080;
+  }
+}

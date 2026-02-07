@@ -22,7 +22,6 @@
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",
-    "@prisma/adapter-pgvector": "^5.20.0",
     "openai": "^4.67.3",
     "zod": "^3.23.8"
   },

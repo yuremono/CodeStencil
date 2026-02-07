@@ -7,14 +7,6 @@ import { PixelButton } from "@/components/y2k";
 import { y2kProducts } from "@/data/y2k-products";
 import type { Product } from "@/context/y2k-cart-context";
 
-// デスクトップアイコン型
-interface DesktopIcon {
-  id: string;
-  label: string;
-  icon: React.ReactNode;
-  href: string;
-}
-
 // デスクトップアイコンのSVG
 const ShoppingIcon = () => (
   <svg width={48} height={48} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-green-400">
@@ -66,14 +58,26 @@ const ContactIcon = () => (
   </svg>
 );
 
-const SizeChartIcon = () => (
-  <svg width={48} height={48} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-cyan-400">
-    <rect x="8" y="8" width="32" height="32" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
-    <line x1="8" y1="18" x2="40" y2="18" stroke="currentColor" strokeWidth="2" />
-    <line x1="8" y1="28" x2="40" y2="28" stroke="currentColor" strokeWidth="2" />
-    <line x1="8" y1="38" x2="40" y2="38" stroke="currentColor" strokeWidth="2" />
-    <line x1="18" y1="8" x2="18" y2="40" stroke="currentColor" strokeWidth="2" />
-    <line x1="28" y1="8" x2="28" y2="40" stroke="currentColor" strokeWidth="2" />
+const TikTokIcon = () => (
+  <svg width={48} height={48} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-pink-400">
+    <circle cx="24" cy="24" r="18" fill="currentColor" />
+    <path d="M20 18 L20 30 C20 33, 22 35, 25 35 C28 35, 30 33, 30 30 C30 27, 28 25, 25 25 L25 18 L32 18 L32 14 L20 14 Z" fill="#000" />
+    <circle cx="22" cy="22" r="3" fill="#00ffff" />
+  </svg>
+);
+
+const SearchIcon = () => (
+  <svg width={48} height={48} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-blue-400">
+    <circle cx="20" cy="20" r="12" fill="none" stroke="currentColor" strokeWidth="3" />
+    <line x1="28" y1="28" x2="38" y2="38" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+  </svg>
+);
+
+const InstagramIcon = () => (
+  <svg width={48} height={48} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-purple-400">
+    <rect x="8" y="8" width="32" height="32" rx="8" fill="none" stroke="currentColor" strokeWidth="3" />
+    <circle cx="24" cy="24" r="8" fill="none" stroke="currentColor" strokeWidth="3" />
+    <circle cx="34" cy="14" r="3" fill="currentColor" />
   </svg>
 );
 
@@ -120,18 +124,6 @@ export default function Y2KPage() {
   const [showWinamp, setShowWinamp] = useState(false);
   const [showChat, setShowChat] = useState(false);
 
-  const desktopIcons: DesktopIcon[] = [
-    { id: "catalog", label: "Catalog", icon: <CatalogIcon />, href: "/y2k/catalog" },
-    { id: "cart", label: "Cart", icon: <CartIcon />, href: "/y2k/cart" },
-    { id: "wishlist", label: "Wishlist", icon: <WishlistIcon />, href: "/y2k/wishlist" },
-    { id: "winamp", label: "Winamp", icon: <WinampIcon />, href: "#" },
-    { id: "chat", label: "Chat", icon: <ChatIcon />, href: "#" },
-    { id: "readme", label: "README", icon: <ReadmeIcon />, href: "/y2k/readme" },
-    { id: "about", label: "About Us", icon: <AboutIcon />, href: "/y2k/about" },
-    { id: "contact", label: "Contact", icon: <ContactIcon />, href: "/y2k/contact" },
-    { id: "size-chart", label: "Size Chart", icon: <SizeChartIcon />, href: "/y2k/size-chart" },
-  ];
-
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-[#000033] via-[#1a0033] to-[#001a00]">
       {/* スター背景アニメーション */}
@@ -154,7 +146,7 @@ export default function Y2KPage() {
       <div className="fixed inset-0 pointer-events-none bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,0,0,0.1)_2px,rgba(0,0,0,0.1)_4px)]" />
 
       {/* デスクトップアイコン */}
-      <div className="relative z-10 p-8 grid grid-cols-1 gap-8 content-start min-h-[calc(100vh-48px)]">
+      <div className="relative z-10 p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 content-start min-h-[calc(100vh-48px)]">
         {/* Shoppingフォルダ（メイン） */}
         <DesktopFolder
           label="Y2K Shopping"
@@ -240,6 +232,30 @@ export default function Y2KPage() {
             icon={<SizeChartIcon />}
           />
         </Link>
+
+        {/* TikTok */}
+        <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
+          <DesktopFolder
+            label="TikTok"
+            icon={<TikTokIcon />}
+          />
+        </a>
+
+        {/* Search */}
+        <Link href="/y2k/catalog">
+          <DesktopFolder
+            label="Search"
+            icon={<SearchIcon />}
+          />
+        </Link>
+
+        {/* Instagram */}
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+          <DesktopFolder
+            label="Instagram"
+            icon={<InstagramIcon />}
+          />
+        </a>
       </div>
 
       {/* ウェルカムウィンドウ */}

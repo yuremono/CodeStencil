@@ -3,6 +3,10 @@
  * Dribbble inspired vibrant pink/purple gradient theme
  */
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Y2K Theme Background */
 @layer base {
   .y2k-theme {

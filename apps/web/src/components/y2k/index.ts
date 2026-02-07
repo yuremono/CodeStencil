@@ -11,3 +11,9 @@ export { pixelButtonVariants } from "./PixelButton";
 export { RetroCard } from "./RetroCard";
 export type { RetroCardProps } from "./RetroCard";
 export { retroCardVariants } from "./RetroCard";
+
+export { Winamp } from "./Winamp";
+export type { WinampProps } from "./Winamp";
+
+export { ChatWindow } from "./ChatWindow";
+export type { ChatWindowProps, ChatMessage } from "./ChatWindow";

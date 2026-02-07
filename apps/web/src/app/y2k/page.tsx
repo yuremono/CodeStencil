@@ -117,10 +117,15 @@ const SizeChartIcon = () => (
 export default function Y2KPage() {
   const [openWindow, setOpenWindow] = useState<string | null>(null);
   const [featuredProduct] = useState<Product>(y2kProducts[0]);
+  const [showWinamp, setShowWinamp] = useState(false);
+  const [showChat, setShowChat] = useState(false);
 
   const desktopIcons: DesktopIcon[] = [
     { id: "catalog", label: "Catalog", icon: <CatalogIcon />, href: "/y2k/catalog" },
     { id: "cart", label: "Cart", icon: <CartIcon />, href: "/y2k/cart" },
+    { id: "wishlist", label: "Wishlist", icon: <WishlistIcon />, href: "/y2k/wishlist" },
+    { id: "winamp", label: "Winamp", icon: <WinampIcon />, href: "#" },
+    { id: "chat", label: "Chat", icon: <ChatIcon />, href: "#" },
     { id: "readme", label: "README", icon: <ReadmeIcon />, href: "/y2k/readme" },
     { id: "about", label: "About Us", icon: <AboutIcon />, href: "/y2k/about" },
     { id: "contact", label: "Contact", icon: <ContactIcon />, href: "/y2k/contact" },
@@ -173,6 +178,36 @@ export default function Y2KPage() {
             icon={<CartIcon />}
           />
         </Link>
+
+        {/* Wishlist */}
+        <Link href="/y2k/wishlist">
+          <DesktopFolder
+            label="Wishlist"
+            icon={<WishlistIcon />}
+          />
+        </Link>
+
+        {/* Winamp */}
+        <div
+          onClick={() => setShowWinamp(!showWinamp)}
+          className="cursor-pointer"
+        >
+          <DesktopFolder
+            label="Winamp"
+            icon={<WinampIcon />}
+          />
+        </div>
+
+        {/* Chat */}
+        <div
+          onClick={() => setShowChat(!showChat)}
+          className="cursor-pointer"
+        >
+          <DesktopFolder
+            label="Chat"
+            icon={<ChatIcon />}
+          />
+        </div>
 
         {/* README */}
         <Link href="/y2k/readme">
@@ -292,6 +327,23 @@ export default function Y2KPage() {
           })}
         </div>
       </div>
+
+      {/* Winamp プレイヤー */}
+      {showWinamp && (
+        <div className="fixed bottom-16 right-8 z-40">
+          <Winamp />
+        </div>
+      )}
+
+      {/* Chat ウィンドウ */}
+      {showChat && (
+        <div className="fixed bottom-16 left-8 z-40">
+          <ChatWindow
+            isOpen={showChat}
+            onClose={() => setShowChat(false)}
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -7,11 +7,13 @@ import { Window95, RetroCard } from "@/components/y2k";
 import { PixelButton } from "@/components/y2k";
 import { y2kProducts } from "@/data/y2k-products";
 import { useY2KCart } from "@/context/y2k-cart-context";
-import { ArrowLeft, ShoppingCart, Home, Star } from "lucide-react";
+import { ArrowLeft, ShoppingCart, Home, Star, Heart } from "lucide-react";
+import { useY2KWishlist } from "@/context/y2k-wishlist-context";
 
 export default function ProductDetailPage() {
   const params = useParams();
   const { addToCart, cart, updateQuantity } = useY2KCart();
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useY2KWishlist();
   const productId = params.id as string;
 
   const product = y2kProducts.find((p) => p.id === productId);
@@ -80,12 +82,20 @@ export default function ProductDetailPage() {
                 {product.name}
               </h1>
             </div>
-            <Link href="/y2k/cart">
-              <PixelButton variant="primary" size="sm">
-                <ShoppingCart size={14} />
-                Cart
-              </PixelButton>
-            </Link>
+            <div className="flex items-center gap-2">
+              <Link href="/y2k/wishlist">
+                <PixelButton variant="default" size="sm">
+                  <Heart size={14} />
+                  Wishlist
+                </PixelButton>
+              </Link>
+              <Link href="/y2k/cart">
+                <PixelButton variant="primary" size="sm">
+                  <ShoppingCart size={14} />
+                  Cart
+                </PixelButton>
+              </Link>
+            </div>
           </div>
         </div>
       </header>
@@ -169,6 +179,29 @@ export default function ProductDetailPage() {
                     <span className="text-red-600">× 売切れ</span>
                   )}
                 </p>
+              </div>
+
+              {/* Wishlistボタン */}
+              <div className="mb-3">
+                {isInWishlist(product.id) ? (
+                  <PixelButton
+                    variant="danger"
+                    className="w-full"
+                    onClick={() => removeFromWishlist(product.id)}
+                  >
+                    <Heart size={14} fill="currentColor" />
+                    ウィッシュリストから削除
+                  </PixelButton>
+                ) : (
+                  <PixelButton
+                    variant="default"
+                    className="w-full"
+                    onClick={() => addToWishlist(product)}
+                  >
+                    <Heart size={14} />
+                    ウィッシュリストに追加
+                  </PixelButton>
+                )}
               </div>
 
               {/* カート操作 */}

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Window95, DesktopFolder } from "@/components/y2k";
+import { Window95, DesktopFolder, Winamp, ChatWindow } from "@/components/y2k";
 import { PixelButton } from "@/components/y2k";
 import { y2kProducts } from "@/data/y2k-products";
 import type { Product } from "@/context/y2k-cart-context";
@@ -52,6 +52,68 @@ const ReadmeIcon = () => (
   </svg>
 );
 
+const AboutIcon = () => (
+  <svg width={48} height={48} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-purple-400">
+    <circle cx="24" cy="16" r="8" fill="currentColor" />
+    <path d="M12 40 C12 32, 18 28, 24 28 C30 28, 36 32, 36 40" fill="currentColor" />
+  </svg>
+);
+
+const ContactIcon = () => (
+  <svg width={48} height={48} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-orange-400">
+    <rect x="8" y="10" width="32" height="28" rx="2" fill="currentColor" />
+    <path d="M8 14 L24 24 L40 14" stroke="#000" strokeWidth="2" fill="none" />
+  </svg>
+);
+
+const SizeChartIcon = () => (
+  <svg width={48} height={48} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-cyan-400">
+    <rect x="8" y="8" width="32" height="32" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
+    <line x1="8" y1="18" x2="40" y2="18" stroke="currentColor" strokeWidth="2" />
+    <line x1="8" y1="28" x2="40" y2="28" stroke="currentColor" strokeWidth="2" />
+    <line x1="8" y1="38" x2="40" y2="38" stroke="currentColor" strokeWidth="2" />
+    <line x1="18" y1="8" x2="18" y2="40" stroke="currentColor" strokeWidth="2" />
+    <line x1="28" y1="8" x2="28" y2="40" stroke="currentColor" strokeWidth="2" />
+  </svg>
+);
+
+const WinampIcon = () => (
+  <svg width={48} height={48} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-green-400">
+    <rect x="8" y="12" width="32" height="24" rx="2" fill="currentColor" />
+    <rect x="12" y="16" width="24" height="8" fill="#000" />
+    <circle cx="18" cy="30" r="2" fill="#00ff00" />
+    <circle cx="24" cy="30" r="2" fill="#00ff00" />
+    <circle cx="30" cy="30" r="2" fill="#00ff00" />
+  </svg>
+);
+
+const ChatIcon = () => (
+  <svg width={48} height={48} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-yellow-400">
+    <rect x="8" y="10" width="32" height="24" rx="2" fill="currentColor" />
+    <path d="M8 34 L16 42 L40 42 L40 34 Z" fill="currentColor" />
+    <rect x="12" y="16" width="24" height="2" fill="#000" />
+    <rect x="12" y="20" width="20" height="2" fill="#000" />
+    <rect x="12" y="24" width="16" height="2" fill="#000" />
+  </svg>
+);
+
+const WishlistIcon = () => (
+  <svg width={48} height={48} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-pink-400">
+    <path d="M24 42 C24 42, 8 28, 8 16 C8 10, 12 6, 18 6 C21 6, 24 9, 24 9 C24 9, 27 6, 30 6 C36 6, 40 10, 40 16 C40 28, 24 42, 24 42 Z" fill="currentColor" />
+  </svg>
+);
+
+const SizeChartIcon = () => (
+  <svg width={48} height={48} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-cyan-400">
+    <rect x="8" y="8" width="32" height="32" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
+    <line x1="8" y1="18" x2="40" y2="18" stroke="currentColor" strokeWidth="2" />
+    <line x1="8" y1="28" x2="40" y2="28" stroke="currentColor" strokeWidth="2" />
+    <line x1="8" y1="38" x2="40" y2="38" stroke="currentColor" strokeWidth="2" />
+    <line x1="18" y1="8" x2="18" y2="40" stroke="currentColor" strokeWidth="2" />
+    <line x1="28" y1="8" x2="28" y2="40" stroke="currentColor" strokeWidth="2" />
+  </svg>
+);
+
 export default function Y2KPage() {
   const [openWindow, setOpenWindow] = useState<string | null>(null);
   const [featuredProduct] = useState<Product>(y2kProducts[0]);
@@ -60,6 +122,9 @@ export default function Y2KPage() {
     { id: "catalog", label: "Catalog", icon: <CatalogIcon />, href: "/y2k/catalog" },
     { id: "cart", label: "Cart", icon: <CartIcon />, href: "/y2k/cart" },
     { id: "readme", label: "README", icon: <ReadmeIcon />, href: "/y2k/readme" },
+    { id: "about", label: "About Us", icon: <AboutIcon />, href: "/y2k/about" },
+    { id: "contact", label: "Contact", icon: <ContactIcon />, href: "/y2k/contact" },
+    { id: "size-chart", label: "Size Chart", icon: <SizeChartIcon />, href: "/y2k/size-chart" },
   ];
 
   return (
@@ -116,6 +181,30 @@ export default function Y2KPage() {
             icon={<ReadmeIcon />}
           />
         </Link>
+
+        {/* About Us */}
+        <Link href="/y2k/about">
+          <DesktopFolder
+            label="About Us"
+            icon={<AboutIcon />}
+          />
+        </Link>
+
+        {/* Contact */}
+        <Link href="/y2k/contact">
+          <DesktopFolder
+            label="Contact"
+            icon={<ContactIcon />}
+          />
+        </Link>
+
+        {/* Size Chart */}
+        <Link href="/y2k/size-chart">
+          <DesktopFolder
+            label="Size Chart"
+            icon={<SizeChartIcon />}
+          />
+        </Link>
       </div>
 
       {/* ウェルカムウィンドウ */}
@@ -152,7 +241,7 @@ export default function Y2KPage() {
               </div>
 
               {/* ボタン */}
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 <Link href="/y2k/catalog">
                   <PixelButton variant="primary">
                     カタログを見る
@@ -161,6 +250,16 @@ export default function Y2KPage() {
                 <Link href="/y2k/cart">
                   <PixelButton variant="default">
                     カートを確認
+                  </PixelButton>
+                </Link>
+                <Link href="/y2k/about">
+                  <PixelButton variant="default">
+                    About Us
+                  </PixelButton>
+                </Link>
+                <Link href="/y2k/contact">
+                  <PixelButton variant="default">
+                    お問い合わせ
                   </PixelButton>
                 </Link>
               </div>
